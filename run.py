@@ -5,6 +5,7 @@ from src.utils import setup_log
 from src.helpers import read_data, display_sudoku, get_output
 from src.opt import build_model
 
+# Main function
 def main(file_path):
     setup_log(log_level = "info")
 

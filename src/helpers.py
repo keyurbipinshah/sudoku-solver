@@ -4,7 +4,7 @@ import logging
 
 # Function that displays the sudoku board
 def display_sudoku(df):
-    df_dict = df.to_dict()
+    df_dict = df.to_dict(orient = "index")
     output = ""
     for row_id in df_dict.keys():
         for column_id in df_dict[row_id].keys():
@@ -30,6 +30,7 @@ def read_data(file_path):
 
     return df
 
+# Function that organises the output
 def get_output(model):
 
     logging.info("Optimizing the model")

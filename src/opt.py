@@ -4,9 +4,11 @@ import gurobipy as gp
 from itertools import product
 import logging
 
+# Defining Gurobi environment and suppressing output
 env = gp.Env()
 env.setParam("OutputFlag", 0)
 
+# Function that builds the optimization model
 def build_model(df):
 
     model = gp.Model("sudoku_solver", env = env)
