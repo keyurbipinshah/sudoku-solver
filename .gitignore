@@ -4,6 +4,8 @@ logs
 daily_run_logs
 historic_run_logs
 
+sudoku.csv
+
 # ReadMe 
 *.html
 
