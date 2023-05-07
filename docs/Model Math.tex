@@ -1,0 +1,72 @@
+\documentclass{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\topmargin}{-1.5in}
+\setlength{\headsep}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9.5in}
+\renewcommand{\baselinestretch}{1.5}
+\usepackage{amsbsy}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\title{Sudoku Solver - Optimizer Math \vspace{-3em}}
+\date{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Inputs \& Parameters}
+
+\begin{itemize}
+    \item $R$ = Set of all rows of a Sudoku grid = $\{1, 2, 3, \dots, 9\}$
+    \item $C$ = Set of all columns a Sudoku grid = $\{1, 2, 3, \dots, 9\}$
+    \item $N$ = Set of all possible numbers in a Sudoku cell = $\{1, 2, 3, \dots, 9\}$
+\end{itemize}
+
+\section{Decision Variables}
+    \begin{equation*}
+        x_{ijk} = \begin{cases}
+            1 & \text{if cell} ~ (i, j) ~ \text{of the grid contains number} ~ k; ~ i \in R, ~ j \in C, ~ k \in N \\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\section{Objective}
+
+\begin{equation*}
+    \text{Min} ~ C; ~ \text{where} ~ C ~ \text{is any constant (since the purpose of the solver is to find any feasible solution)}
+\end{equation*}
+
+\section{Subject to Constraints}
+
+\begin{itemize}
+    \item \textbf{Cell constraints}: A cell can contain only a single number.
+        \begin{equation*}
+            \sum_{k \in N} x_{ijk} = 1 ; ~ \forall i \in R, ~ j \in C
+        \end{equation*}
+    \item \textbf{Column constraints}: All cells in a column must contain each number exactly once.
+        \begin{equation*}
+            \sum_{i \in R} x_{ijk} = 1 ; ~ \forall j \in C, ~ k \in N
+        \end{equation*}
+    \item \textbf{Row constraints}: All cells in a row must contain each number exactly once.
+        \begin{equation*}
+            \sum_{i \in C} x_{ijk} = 1 ; ~ \forall i \in R, ~ k \in N
+        \end{equation*}
+    \item \textbf{Sub-grid constraints}: All cells in a non-overlapping 3 by 3 grid from the top-left contains each number exactly once.
+        \begin{equation*}
+            \sum_{i^{\prime} = i}^{i + 2} \sum_{j^{\prime} = j}^{j + 2} x_{ijk} = 1 ; ~ \forall i \in \{1, 4, 7\}, ~ j \in \{1, 4, 7\}, ~ k \in N
+        \end{equation*}
+    \item \textbf{Input cell constraints}: These constraints correspond to cells that already have a value in the unsolved Sudoku grid.
+        \begin{equation*}
+            x_{i, j, k = s_{ij}} = 1; ~ \forall i, j ~ \text{which have a pre-set number} ~ s_{ij}
+        \end{equation*}
+\end{itemize}
+
+\end{document}

@@ -145,5 +145,13 @@ dmypy.json
 # Temporary files
 temp*
 
+# LaTeX files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
 # Other files
 validate.py
