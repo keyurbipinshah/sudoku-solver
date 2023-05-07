@@ -24,7 +24,7 @@ def read_data(file_path):
     n = [*range(1, 9 + 1)]
     
     logging.info("Reading unsolved Sudoku")
-    df = pd.read_csv(file_path, dtype = "Int64")
+    df = pd.read_csv(file_path, dtype = "Int64", index_col = 0)
     df.index = n
     df.columns = n
 
