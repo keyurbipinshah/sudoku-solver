@@ -21,7 +21,7 @@ def display_sudoku(df):
 # Function to read input data and format the column and index names
 def read_data(file_path):
 
-    n = [*range(1, 9 + 1)]
+    n = range(1, 9 + 1)
     
     logging.info("Reading unsolved Sudoku")
     df = pd.read_csv(file_path, dtype = "Int64", index_col = 0)
@@ -40,7 +40,7 @@ def get_output(model):
     var_names = model.getAttr("VarName", model.getVars())
     var_names = [tuple(iter.replace("x[", "").replace("]", "").split(",")) for iter in var_names]
     var_values = model.getAttr("X", model.getVars())
-    var_values = {iter[0]: iter[1] for iter in [*zip(var_names, var_values)]}
+    var_values = {iter[0]: iter[1] for iter in zip(var_names, var_values)}
 
     logging.info("Formatting model output")
     solution = pd.Series(var_values).reset_index()
